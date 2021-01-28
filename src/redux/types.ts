@@ -1,9 +1,15 @@
 import { Breeds } from '../models'
+import { FormState } from './reducers'
 
 export const SET_DOG_BREEDS = 'SET_DOG_BREEDS'
+export const SELECT_BREED = 'SELECT_BREED'
+export const SELECT_SUB_BREED = 'SELECT_SUB_BREED'
+export const SET_IMAGE_COUNT = 'SET_IMAGE_COUNT'
+export const ADD_ROW = 'ADD_ROW'
 
 export interface Payload {
-  data: any
+  data: any,
+  index?: number
 }
 
 interface SetDogBreedsAction {
@@ -13,8 +19,43 @@ interface SetDogBreedsAction {
   }
 }
 
-export interface AppState {
-  breeds: Breeds
+interface SetSelectedBreedAction {
+  type: typeof SELECT_BREED,
+  payload: {
+    data: string,
+    index: number
+  }
 }
 
-export type StoreActionTypes = SetDogBreedsAction
+interface SetSelectedSubbreedAction {
+  type: typeof SELECT_SUB_BREED,
+  payload: {
+    data: string,
+    index: number
+  }
+}
+
+interface SetImageCountAction {
+  type: typeof SET_IMAGE_COUNT,
+  payload: {
+    data: number,
+    index: number
+  }
+}
+
+interface AddRowAction {
+  type: typeof ADD_ROW
+}
+
+export interface AppState {
+  breeds: Breeds,
+  forms: FormState[]
+}
+
+export type StoreActionTypes = (
+  SetDogBreedsAction
+  | SetSelectedBreedAction
+  | SetSelectedSubbreedAction
+  | SetImageCountAction
+  | AddRowAction
+)

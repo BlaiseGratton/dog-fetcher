@@ -2,24 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import { AppState } from '../redux/types'
-import { Breeds } from '../models'
+import { FormState } from '../redux/reducers'
+import OptionsRow from './OptionsRow'
+import { addRow } from '../redux/actions'
 
 interface Props {
-  doggos: Breeds
+  rows: FormState[],
+  addRow: Function
 }
 
-const App = ({doggos}:Props) => {
-  return (
-    <div>
-      <ul>
-        {Object.entries(doggos).map(([name, subbreeds]) => 
-          (<li key={name}>{`${name} ${subbreeds.join(', ')}`}</li>))
-        }
-      </ul>
-    </div>
-  )
-}
+const App = ({ rows, addRow }: Props) => (
+  <section>
+    {rows.map((row, index) => <OptionsRow rowState={row} index={index} key={index}/>)}
+    <button onClick={() => addRow()}>Add Row</button>
+  </section>
+)
 
 export default connect((state:AppState) => ({
-  doggos: state.breeds
-}))(App)
+  rows: state.forms
+}), { addRow })(App)
