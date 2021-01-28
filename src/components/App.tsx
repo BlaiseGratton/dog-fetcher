@@ -1,10 +1,25 @@
-import * as React from 'react';
+import React from 'react';
+import { connect } from 'react-redux'
 
-function App() {
+import { AppState } from '../redux/types'
+import { Breeds } from '../models'
+
+interface Props {
+  doggos: Breeds
+}
+
+const App = ({doggos}:Props) => {
   return (
     <div>
+      <ul>
+        {Object.entries(doggos).map(([name, subbreeds]) => 
+          (<li key={name}>{`${name} ${subbreeds.join(', ')}`}</li>))
+        }
+      </ul>
     </div>
   )
 }
 
-export default App;
+export default connect((state:AppState) => ({
+  doggos: state.breeds
+}))(App)

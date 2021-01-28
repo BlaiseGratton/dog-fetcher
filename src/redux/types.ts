@@ -1,10 +1,20 @@
-export const UPDATE_STORE = 'UPDATE_STORE'
+import { Breeds } from '../models'
+
+export const SET_DOG_BREEDS = 'SET_DOG_BREEDS'
 
 export interface Payload {
-  breed: string
+  data: any
 }
 
-export interface UpdateStoreAction {
-  type: typeof UPDATE_STORE,
-  payload: Payload
+interface SetDogBreedsAction {
+  type: typeof SET_DOG_BREEDS,
+  payload: {
+    data: Breeds
+  }
 }
+
+export interface AppState {
+  breeds: Breeds
+}
+
+export type StoreActionTypes = SetDogBreedsAction

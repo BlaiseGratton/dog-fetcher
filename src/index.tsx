@@ -2,11 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-
 import { Provider } from 'react-redux'
-import store from './redux/store'
 
 import App from './components/App';
+import store from './redux/store'
+import { getAllDogBreeds } from './redux/thunks'
+
+getAllDogBreeds()(store.dispatch)
 
 ReactDOM.render(
   <React.StrictMode>
