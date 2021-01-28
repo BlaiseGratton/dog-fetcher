@@ -4,6 +4,7 @@ const Option = ({ value }: {value: string}) => (<option value={value}>{value}</o
 
 const Dropdown = ({ options, onSelect }: { options: string[], onSelect: Function }) => (
   <select onChange={(event => onSelect(event.target.value))}>
+    <option>-- Select --</option>
     {options.map(option => <Option key={option} value={option} />)}
   </select>
 )

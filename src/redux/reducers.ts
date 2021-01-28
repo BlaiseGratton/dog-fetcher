@@ -45,6 +45,7 @@ const formStateReducer = (state: FormState[] = [{...initialFormState}], action: 
     case SELECT_BREED: {
       const formToUpdate = stateCopy[action.payload.index]
       formToUpdate.selectedBreed = action.payload.data
+      formToUpdate.selectedSubbreed = ''  // need to reset this
       return stateCopy
     }
     case SELECT_SUB_BREED: {

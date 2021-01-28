@@ -11,10 +11,12 @@ interface Props {
   fetchRandomImages: Function
 }
 
+const rowIsInvalid = (row: FormState) => !row.selectedBreed || !row.imageCount
+
 const OptionsRow = ({ index, rowState, fetchRandomImages }: Props) => (
   <section>
     <SelectContainer formIndex={index} {...rowState} />
-    <button onClick={() => fetchRandomImages(rowState)}>Generate</button>
+    <button disabled={rowIsInvalid(rowState)} onClick={() => fetchRandomImages(rowState)}>Generate</button>
   </section>
 )
 
