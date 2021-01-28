@@ -1,18 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import SelectContainer from './SelectContainer'
 import { FormState } from '../redux/reducers'
+import { fetchRandomImages } from '../redux/thunks'
 
 interface Props {
   index: number,
-  rowState: FormState
+  rowState: FormState,
+  fetchRandomImages: Function
 }
 
-const OptionsRow = ({ index, rowState }: Props) => (
+const OptionsRow = ({ index, rowState, fetchRandomImages }: Props) => (
   <section>
     <SelectContainer formIndex={index} {...rowState} />
-    <button>Generate</button>
+    <button onClick={() => fetchRandomImages(rowState)}>Generate</button>
   </section>
 )
 
-export default OptionsRow
+export default connect(null, { fetchRandomImages })(OptionsRow)

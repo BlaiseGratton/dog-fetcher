@@ -7,7 +7,8 @@ import {
   SELECT_BREED,
   SELECT_SUB_BREED,
   SET_IMAGE_COUNT,
-  ADD_ROW
+  ADD_ROW,
+  SET_RANDOM_IMAGES
 } from './types'
 
 const initialBreedState: Breeds = {}
@@ -24,17 +25,21 @@ const allBreedsReducer = (state: Breeds = initialBreedState, action: StoreAction
 export interface FormState {
   selectedBreed: string,
   selectedSubbreed: string,
-  imageCount: number
+  imageCount: number,
+  key: number
 }
+
+const generateRandomKey = () => Math.floor(Math.random() * 1000000)
 
 const initialFormState = {
   selectedBreed: '',
   selectedSubbreed: '',
-  imageCount: 1
+  imageCount: 1,
+  key: generateRandomKey()
 }
 
-const formStateReducer = (state: FormState[] = [initialFormState], action: StoreActionTypes): FormState[] => {
-  const stateCopy = [...state]
+const formStateReducer = (state: FormState[] = [{...initialFormState}], action: StoreActionTypes): FormState[] => {
+  const stateCopy = state.map(item => ({...item}))
 
   switch (action.type) {
     case SELECT_BREED: {
@@ -59,10 +64,19 @@ const formStateReducer = (state: FormState[] = [initialFormState], action: Store
       return stateCopy
     }
     case ADD_ROW:
-      return [...state, {...initialFormState}]
+      return [...state, {...initialFormState, key: generateRandomKey() }]
     default:
       return state
   }
 }
 
-export default combineReducers({ breeds: allBreedsReducer, forms: formStateReducer })
+const imageReducer = (state: URL[] = [], action: StoreActionTypes): URL[] => {
+  switch (action.type) {
+    case SET_RANDOM_IMAGES:
+      return action.payload.data
+    default:
+      return state
+  }
+}
+
+export default combineReducers({ breeds: allBreedsReducer, forms: formStateReducer, images: imageReducer })
