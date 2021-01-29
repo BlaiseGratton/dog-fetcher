@@ -13,6 +13,7 @@ const ImageCountSelector = ({value, onChange}: Props) => (
                onChange={event => onChange(Number(event.target.value))}
                label="# of Images"
                type="number"
+               inputProps={{ 'data-testid': 'image-count-input' }}
     />
   </FormControl>
 )
