@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import { Breeds } from '../models'
-
 import {
   StoreActionTypes,
   SET_DOG_BREEDS,
@@ -8,7 +7,7 @@ import {
   SELECT_SUB_BREED,
   SET_IMAGE_COUNT,
   ADD_ROW,
-  SET_RANDOM_IMAGES
+  SET_IMAGES
 } from './types'
 
 const initialBreedState: Breeds = {}
@@ -73,7 +72,7 @@ const formStateReducer = (state: FormState[] = [{...initialFormState}], action: 
 
 const imageReducer = (state: URL[] = [], action: StoreActionTypes): URL[] => {
   switch (action.type) {
-    case SET_RANDOM_IMAGES:
+    case SET_IMAGES:
       return action.payload.data
     default:
       return state

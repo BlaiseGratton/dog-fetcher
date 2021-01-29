@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import Button from '@material-ui/core/Button'
 
 import { AppState } from '../redux/types'
 import { FormState } from '../redux/reducers'
 import OptionsRow from './OptionsRow'
 import { addRow } from '../redux/actions'
-import Button from '@material-ui/core/Button'
+import ImageModal from './ImageModal'
 
 interface Props {
   rows: FormState[],
@@ -19,7 +20,7 @@ const App = ({ rows, addRow, images }: Props) => (
       {rows.map((row, index) => <OptionsRow rowState={row} index={index} key={row.key}/>)}
     </section>
     <Button color="primary" variant="contained" onClick={() => addRow()}>Add Row</Button>
-    {images.map(url => <img src={url.toString()} alt='a random dog' key={url.toString()} />)}
+    <ImageModal />
   </section>
 )
 

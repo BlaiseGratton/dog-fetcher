@@ -4,7 +4,7 @@ import {
   SELECT_SUB_BREED,
   SET_IMAGE_COUNT,
   ADD_ROW,
-  SET_RANDOM_IMAGES,
+  SET_IMAGES,
   StoreActionTypes
 } from './types'
 import { Breeds } from '../models'
@@ -20,7 +20,7 @@ export const setAllBreeds = (breeds: Breeds): StoreActionTypes => {
 
 export const setRandomImages = (images: URL[]): StoreActionTypes => {
   return {
-    type: SET_RANDOM_IMAGES,
+    type: SET_IMAGES,
     payload: {
       data: images
     }
@@ -57,8 +57,8 @@ export const setImageCount = (imageCount: number, index: number): StoreActionTyp
   }
 }
 
-export const addRow = (): StoreActionTypes => {
-  return {
-    type: ADD_ROW
-  }
-}
+export const addRow = (): StoreActionTypes => ({ type: ADD_ROW })
+
+export const clearImages = (): StoreActionTypes => (
+  { type: SET_IMAGES, payload: { data: [] } }
+)

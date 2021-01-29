@@ -6,7 +6,7 @@ export const SELECT_BREED = 'SELECT_BREED'
 export const SELECT_SUB_BREED = 'SELECT_SUB_BREED'
 export const SET_IMAGE_COUNT = 'SET_IMAGE_COUNT'
 export const ADD_ROW = 'ADD_ROW'
-export const SET_RANDOM_IMAGES = 'SET_RANDOM_IMAGES'
+export const SET_IMAGES = 'SET_IMAGES'
 
 export interface Payload {
   data: any,
@@ -45,7 +45,7 @@ interface SetImageCountAction {
 }
 
 interface SetRandomImagesAction {
-  type: typeof SET_RANDOM_IMAGES,
+  type: typeof SET_IMAGES,
   payload: {
     data: URL[]
   }
@@ -53,6 +53,13 @@ interface SetRandomImagesAction {
 
 interface AddRowAction {
   type: typeof ADD_ROW
+}
+
+interface ClearImagesAction {
+  type: typeof SET_IMAGES,
+  payload: {
+    data: []
+  }
 }
 
 export interface AppState {
@@ -68,4 +75,5 @@ export type StoreActionTypes = (
   | SetImageCountAction
   | AddRowAction
   | SetRandomImagesAction
+  | ClearImagesAction
 )
