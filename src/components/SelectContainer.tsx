@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import Grid from '@material-ui/core/Grid'
 
 import { AppState } from '../redux/types'
 import { Breeds } from '../models'
@@ -20,7 +21,8 @@ interface Props {
 const BreedDropdown = DropdownSource(
   Dropdown,
   (breeds: Breeds) => Object.keys(breeds),
-  selectBreedType
+  selectBreedType,
+  'Breed'
 )
 
 const SubBreedDropdown = DropdownSource(
@@ -28,16 +30,23 @@ const SubBreedDropdown = DropdownSource(
   (breeds: Breeds, selectedBreed: string) => {
     return breeds[selectedBreed] || []
   },
-  selectSubbreedType
+  selectSubbreedType,
+  'Sub-Breed'
 )
 
 const SelectContainer = ({ doggos, selectedBreed, selectedSubbreed, imageCount, setImageCount, formIndex }: Props) => {
   return (
-    <section>
-      <BreedDropdown breeds={doggos} formIndex={formIndex} />
-      <SubBreedDropdown breeds={doggos} selection={selectedBreed} formIndex={formIndex} />
-      <ImageCountSelector value={imageCount} onChange={(value:number) => setImageCount(value, formIndex)} />
-    </section>
+    <Grid container spacing={8}>
+      <Grid item>
+        <BreedDropdown breeds={doggos} formIndex={formIndex} />
+      </Grid>
+      <Grid item>
+        <SubBreedDropdown breeds={doggos} selection={selectedBreed} formIndex={formIndex} />
+      </Grid>
+      <Grid item>
+        <ImageCountSelector value={imageCount} onChange={(value:number) => setImageCount(value, formIndex)} />
+      </Grid>
+    </Grid>
   )
 }
 

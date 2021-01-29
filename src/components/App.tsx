@@ -5,6 +5,7 @@ import { AppState } from '../redux/types'
 import { FormState } from '../redux/reducers'
 import OptionsRow from './OptionsRow'
 import { addRow } from '../redux/actions'
+import Button from '@material-ui/core/Button'
 
 interface Props {
   rows: FormState[],
@@ -14,8 +15,10 @@ interface Props {
 
 const App = ({ rows, addRow, images }: Props) => (
   <section>
-    {rows.map((row, index) => <OptionsRow rowState={row} index={index} key={row.key}/>)}
-    <button onClick={() => addRow()}>Add Row</button>
+    <section>
+      {rows.map((row, index) => <OptionsRow rowState={row} index={index} key={row.key}/>)}
+    </section>
+    <Button color="primary" variant="contained" onClick={() => addRow()}>Add Row</Button>
     {images.map(url => <img src={url.toString()} alt='a random dog' key={url.toString()} />)}
   </section>
 )
